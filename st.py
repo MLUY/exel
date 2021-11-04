@@ -11,7 +11,7 @@ disposal= sheet['C4'].value
 
 
 
-cell_range = ws['D8':'G3']
+cell_range = sheet['D8':'G3']
 
 st.write(f'Backhoe production: {production} m3/hr')
 st.write(f'Disposal distance: {disposal} knots')
