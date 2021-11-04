@@ -8,7 +8,8 @@ class Barge:
        self.hopper=hopper
        self.hs_norm=hs_norm
        self.color=color 
-  
+ 
+colors=['olive','navy','red','blue']
   
 wb = openpyxl.load_workbook('project_data.xlsx')  
   
