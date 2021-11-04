@@ -17,7 +17,7 @@ sheet = wb.active
 production = sheet['C3'].value  
 disposal= sheet['C4'].value 
 
-cell_range = sheet['D8':'G3']
+cell_range = sheet['D8':'G10']
 
 barges=[Barge(speed=cell_range[0][a].value,hopper=cell_range[1][a],hs_norm=cell_range[2][a],color=(colors[a],150)) for a in range(4)]
 
