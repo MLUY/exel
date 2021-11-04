@@ -24,4 +24,8 @@ barges=[Barge(speed=cell_range[0][a].value,hopper=cell_range[1][a],hs_norm=cell_
 
 st.write(f'Backhoe production: {production} m3/hr')
 st.write(f'Disposal distance: {disposal} knots')
+
 st.write(f'1st Backhoe speed: {barges[0].speed} knots')
+st.write(f'2nd Backhoe speed: {barges[1].speed} knots')
+st.write(f'3rd Backhoe speed: {barges[2].speed} knots')
+st.write(f'4th Backhoe speed: {barges[3].speed} knots')
