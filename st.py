@@ -1,5 +1,6 @@
 
 import streamlit as st  # pip install streamlit
+import pandas as pd
 import openpyxl  
   
 class Barge:
@@ -29,3 +30,42 @@ st.write(f'1st Backhoe speed: {barges[0].speed} knots')
 st.write(f'2nd Backhoe speed: {barges[1].speed} knots')
 st.write(f'3rd Backhoe speed: {barges[2].speed} knots')
 st.write(f'4th Backhoe speed: {barges[3].speed} knots')
+
+# ---- READ EXCEL ----
+@st.cache
+def read_file():
+    df = pd.read_excel(
+        io=uploaded_file,
+        engine="openpyxl",
+        sheet_name="data",
+        skiprows=3,
+        usecols="A:V",
+        nrows=8000,
+    )
+    
+    return df
+
+#radio buttons
+status=st.radio('how do you want to feed in data',('upload excel','manual entry'))
+
+if status=='upload excel':
+    uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")       
+    
+    if uploaded_file:
+        df=read_file()
+        #df['date']=df.apply(lambda x: datetime.date(df['YYYY'], df['MM'], df['DD'],df['HH']),axis=1)
+        st.dataframe(df)
+else:
+    st.write('pfff')
+
+
+
+
+
+
+
+
+
+
+
+
