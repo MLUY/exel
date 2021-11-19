@@ -76,9 +76,11 @@ def read_file():
 #radio buttons
 status=st.radio('how do you want to feed in data',('upload excel','manual entry'))
 
-if status=='upload excel':
+if status=='upload excel' and not df:
     uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")        
     df=read_file()
+    
+    
 else:
     st.write('pfff')   
 
