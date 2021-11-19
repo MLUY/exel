@@ -65,7 +65,7 @@ def read_file():
     
     df["date_time"]=pd.to_datetime(df[["year", "month", "day", "hour"]])
     df.sort_values(by="date_time")
-    df["delta"] = df["date_time"].diff(1).astype("timedelta64[h]")
+    df["delta"] = df["date_time"].diff(-1).astype("timedelta64[h]")
     
     return df
 
