@@ -61,7 +61,9 @@ def read_file():
                        'Tm_Swell'] 
   
         
-    df=pd.read_excel(io=uploaded_file,engine="openpyxl",sheet_name="data",skiprows=3,usecols=[0,1,2,3,7],names=['year', 'month', 'day', 'hour','Hm0'],nrows=8767)
+    df=pd.read_excel(io=uploaded_file,engine="openpyxl",sheet_name="data",skiprows=3,usecols=[0,1,2,3,7],names=['year', 'month', 'day', 'hour','Hm0'])
+    
+    # ,nrows=8767
     
     df["date_time"]=pd.to_datetime(df[["year", "month", "day", "hour"]])
     df.sort_values(by="date_time",inplace=True)
