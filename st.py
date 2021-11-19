@@ -62,8 +62,8 @@ def read_file():
   
         
     df=pd.read_excel(io=uploaded_file,engine="openpyxl",sheet_name="data",skiprows=3,usecols=[0,1,2,3,7],names=['year', 'month', 'day', 'hour','Hm0'],nrows=1000)
-    df['date_time']=pd.to_datetime(df[['year', 'month', 'day', 'hour']])
-    df['delta'] = df["Date_time"].diff(1).astype('timedelta64[h]')
+    df["date_time"]=pd.to_datetime(df[["year", "month", "day", "hour"]])
+    #df['delta'] = df["Date_time"].diff(1).astype('timedelta64[h]')
     
     return df
 
