@@ -61,7 +61,7 @@ def read_file():
                        'Tm_Swell'] 
   
         
-    df=pd.read_excel(io=uploaded_file,engine="openpyxl",sheet_name="data")
+    df=pd.read_excel(io=uploaded_file,engine="openpyxl",sheet_name="data",nrows=8767)
     
     
     # ,skiprows=3,usecols=[0,1,2,3,7],names=['year', 'month', 'day', 'hour','Hm0'],nrows=8767
