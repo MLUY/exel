@@ -1,6 +1,7 @@
 
 import streamlit as st  # pip install streamlit
 import pandas as pd
+import datetime as dt
 import openpyxl  
   
 class Barge:
@@ -34,6 +35,31 @@ st.write(f'4th Backhoe speed: {barges[3].speed} knots')
 # ---- READ EXCEL ----
 @st.cache
 def read_file():
+  
+# ----- werkbaarheid.xlsx - standard format Hydronamic
+    all_column_names= ['year',
+                       'month',
+                       'day',
+                       'hour',
+                       'u10',
+                       'u10d',
+                       'tide',
+                       'Hm0',
+                       'Theta',
+                       'Tp',                   
+                       'Tz',
+                       'Tm',
+                       'Hm0_Sea',
+                       'Theta_Sea',
+                       'Tp_Sea',
+                       'Tz_Sea',
+                       'Tm_Sea',
+                       'Hm0_Swell',
+                       'Theta_Swell',
+                       'Tp_Swell',                  
+                       'Tz_Swell',
+                       'Tm_Swell'] 
+  
         
     df=pd.read_excel(uploaded_file,skiprows=3,usecols=[0,1,2,3,7],names=['year', 'month', 'day', 'hour','Hm0'])
     df['date_time']=pd.to_datetime(df[['year', 'month', 'day', 'hour']])
