@@ -61,7 +61,7 @@ def read_file():
                        'Tm_Swell'] 
   
         
-    df=pd.read_excel(io=uploaded_file,engine="openpyxl",sheet_name="data",skiprows=3,usecols=[0,1,2,3,7],names=['year', 'month', 'day', 'hour','Hm0'])
+    df=pd.read_excel(io=uploaded_file,engine="openpyxl",sheet_name="data",skiprows=3,usecols=[0,1,2,3,7],names=['year', 'month', 'day', 'hour','Hm0'],nrows=8767)
     
     
     # ,skiprows=3,usecols=[0,1,2,3,7],names=['year', 'month', 'day', 'hour','Hm0'],nrows=8767
@@ -78,14 +78,11 @@ status=st.radio('how do you want to feed in data',('upload excel','manual entry'
 
 if status=='upload excel':
     uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")        
-
+    df=read_file()
 else:
     st.write('pfff')   
 
-if uploaded_file:
-    df=read_file()
-    #df['date']=df.apply(lambda x: datetime.date(df['YYYY'], df['MM'], df['DD'],df['HH']),axis=1)
-    st.dataframe(df)
+
 
 
 
