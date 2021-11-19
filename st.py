@@ -49,16 +49,15 @@ def read_file():
 status=st.radio('how do you want to feed in data',('upload excel','manual entry'))
 
 if status=='upload excel':
-    uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")       
-    
-    if uploaded_file:
-        df=read_file()
-        #df['date']=df.apply(lambda x: datetime.date(df['YYYY'], df['MM'], df['DD'],df['HH']),axis=1)
-        st.dataframe(df)
+    uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")        
+
 else:
-    st.write('pfff')
+    st.write('pfff')   
 
-
+if uploaded_file:
+    df=read_file()
+    #df['date']=df.apply(lambda x: datetime.date(df['YYYY'], df['MM'], df['DD'],df['HH']),axis=1)
+    st.dataframe(df)
 
 
 
