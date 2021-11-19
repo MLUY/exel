@@ -61,7 +61,7 @@ def read_file():
                        'Tm_Swell'] 
   
         
-    df=pd.read_excel(uploaded_file,skiprows=3,usecols=[0,1,2,3,7],names=['year', 'month', 'day', 'hour','Hm0'])
+    df=pd.read_excel(uploaded_file)
     #df['date_time']=pd.to_datetime(df[['year', 'month', 'day', 'hour']])
     #df['delta'] = df["Date_time"].diff(1).astype('timedelta64[h]')
     
