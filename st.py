@@ -1,4 +1,3 @@
-
 import streamlit as st  # pip install streamlit
 import pandas as pd
 import datetime as dt
@@ -11,7 +10,7 @@ class Barge:
        self.hs_norm=hs_norm
        self.color=color 
 
-rf=False
+
 colors=['olive','navy','red','blue']
   
 wb = openpyxl.load_workbook('project_data.xlsx')  
@@ -61,26 +60,30 @@ def read_file():
                        'Tz_Swell',
                        'Tm_Swell'] 
   
+    cols=[0, 1, 2, 3, 6, 7, 9, 10]   
         
-    df=pd.read_excel(io=uploaded_file,engine="openpyxl",sheet_name="data",skiprows=3,usecols=[0,1,2,3,7],names=['year', 'month', 'day', 'hour','Hm0'],nrows=8767)
+    df=pd.read_excel(io=uploaded_file,engine="openpyxl",sheet_name="data",skiprows=3,usecols=cols)
+        
+    df.columns=['year', 'month', 'day', 'hour','tide','Hm0','Tp','Tz']    
     
     
     # ,skiprows=3,usecols=[0,1,2,3,7],names=['year', 'month', 'day', 'hour','Hm0'],nrows=8767
     # ,nrows=8767
     
-    #df["date_time"]=pd.to_datetime(df[["year", "month", "day", "hour"]])
-    #df.sort_values(by="date_time",inplace=True)
-    #df["delta"] = df["date_time"].diff(1).astype("timedelta64[h]")
+    df["date_time"]=pd.to_datetime(df[["year", "month", "day", "hour"]])
+    df.sort_values(by="date_time",inplace=True)
+    df["delta"] = df["date_time"].diff(1).astype("timedelta64[h]")
     
     return df
 
 #radio buttons
 status=st.radio('how do you want to feed in data',('upload excel','manual entry'))
 
-if status=='upload excel' and rf==False:
+if status=='upload excel':
     uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")        
     df=read_file()
-    rf=True
+    st.dataframe(df)
+   
     
     
 else:
@@ -88,12 +91,32 @@ else:
 
 
 
+with st.echo(code_location='below'):
+    import matplotlib.pyplot as plt
+    
+    Hs=df['Hm0']
+    Tp=df['Tp']
+    Tz=df['Tz']
+    tm=df['tide']
+    dm=df['date_time']    
 
+    fig,ax=plt.subplots(1,4,figsize=(18,5))
 
+    ax[0].hist(Hs,color='#de3517',bins=15,edgecolor='k',density=True)
+    ax[0].set_xlim(0,5)
+    #ax[0].set_xlabel('histogram')
 
+    ax[1].scatter(Tp,Hs,color='green',s=1,label='thats nice')
+    ax[1].scatter(Tz,Hs,color='blue',s=1,label='thats not nice')
+    ax[1].legend()
+    ax[1].set_xlabel('oops', fontsize=14)
+    ax[1].grid()
 
+    ax[2].scatter(Tz,Hs,s=1)
 
-
+    ax[3].plot(dm,tm,color='#f0d20f',label='thats nice',linewidth=0.5)
+    
+    st.write(fig)
 
 
 
